@@ -1,4 +1,28 @@
-<button rouerLink="/login">login</button>
-<button rouerLink="">catalog</button>
-<button rouerLink="/contacts">contacts</button>
-
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <h1>Brand</h1>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/"> Catalogo </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login"> Login </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contacts"> Contacts </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

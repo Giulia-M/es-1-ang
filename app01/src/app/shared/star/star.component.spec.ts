@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CatalogFormSearchComponent } from './catalog-form-search.component';
+import { StarComponent } from './star.component';
 
-describe('CatalogFormSearchComponent', () => {
-  let component: CatalogFormSearchComponent;
-  let fixture: ComponentFixture<CatalogFormSearchComponent>;
+describe('StarComponent', () => {
+  let component: StarComponent;
+  let fixture: ComponentFixture<StarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CatalogFormSearchComponent ]
+      declarations: [ StarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CatalogFormSearchComponent);
+    fixture = TestBed.createComponent(StarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

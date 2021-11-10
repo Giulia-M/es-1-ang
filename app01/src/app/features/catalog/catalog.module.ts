@@ -1,17 +1,11 @@
-import { NgModule } from "@angular/core";
-import { CatalogComponent } from "./catalog.component";
-import { CatalogFormSearchComponent } from "./components/catalog-form-search/catalog-form-search.component";
-import { CatalogListComponent } from "./components/catalog-list/catalog-list.component";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CatalogRoutingModule } from './catalog-routing.module';
+import { CatalogComponent } from './catalog.component';
 
-@NgModule ({
-    declarations:[
-        CatalogComponent,
-        CatalogFormSearchComponent,
-        CatalogListComponent
-    ],
-    imports:[],
-    providers:[]
+@NgModule({
+  declarations: [CatalogComponent],
+  imports: [CommonModule, CatalogRoutingModule],
+  providers: [],
 })
-export class CatalogModule {
-
-}
+export class CatalogModule {}
