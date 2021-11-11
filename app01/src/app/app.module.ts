@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,13 +15,13 @@ import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { ProductDetailComponent } from './features/product-detail/product-detail.component';
 import { CarrelloComponent } from './features/carrello/carrello.component';
 import { CarrelloModule } from './features/carrello/carrello.module';
+import { LoginComponent } from './features/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StarComponent,
     ProductDetailComponent,
-
     //componenti di navigazione e le viste
   ],
   imports: [
@@ -35,6 +35,8 @@ import { CarrelloModule } from './features/carrello/carrello.module';
     CarrelloModule,
     CoreModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
 
   providers: [],

@@ -34,6 +34,6 @@ export class CarrelloService {
   }
 
   proceed() {
-    window.alert(this.items.length);
+    window.alert(` Hai acquistato ${this.items.length} film`);
   }
 }
