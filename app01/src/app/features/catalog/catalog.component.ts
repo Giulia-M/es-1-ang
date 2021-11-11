@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CarrelloService } from 'src/app/core/services/carrello.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/models/product';
 
@@ -9,7 +10,11 @@ import { Product } from 'src/app/models/product';
 })
 export class CatalogComponent implements OnInit {
   products: Product[];
-  constructor(private productService: ProductService) {
+  active!: Product;
+  constructor(
+    private productService: ProductService,
+    private cart: CarrelloService
+  ) {
     this.products = [];
   }
 
@@ -19,5 +24,14 @@ export class CatalogComponent implements OnInit {
       (errore) => console.log('errore!' + errore),
       () => console.log('Dati dei post caricati con successo')
     );
+  }
+
+  addToCart(p: Product): void {
+    // console.log(p);
+    this.cart.addToCart(p);
+  }
+  setActive(product: Product) {
+    // console.log(product);
+    this.active = product;
   }
 }

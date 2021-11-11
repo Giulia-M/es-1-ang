@@ -8,7 +8,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let p of products">
+    <tr
+      *ngFor="let p of products"
+      (click)="setActive(p)"
+      [ngClass]="{ active: p.id === active?.id }"
+    >
       <td>
         <img src="{{ p.thumbnailUrl }}" alt="immagine" />
       </td>
@@ -16,8 +20,12 @@
         {{ p.title }}
       </td>
       <td>
-        <button routerLink="/photos/{{ p.id }}" class="btn btn-info">
-          Dettagli
+        <button
+          routerLink="/photos/{{ p.id }}"
+          class="btn btn-info"
+          (click)="addToCart(p)"
+        >
+          Aggiungi al carrello
         </button>
       </td>
     </tr>
