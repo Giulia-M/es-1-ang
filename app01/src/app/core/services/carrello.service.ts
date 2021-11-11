@@ -27,5 +27,13 @@ export class CarrelloService {
     ];
   }
 
-  removeFromCart(cartItem: CartItem) {}
+  removeFromCart(cartItem: CartItem) {
+    this.items = this.items.filter(
+      (item) => item.creationDate !== cartItem.creationDate
+    );
+  }
+
+  proceed() {
+    window.alert(this.items.length);
+  }
 }
