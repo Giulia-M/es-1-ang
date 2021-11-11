@@ -1,1 +1,25 @@
-
+<h2>Elenco</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Immagine</th>
+      <th>Titolo</th>
+      <th>Operazioni</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of products">
+      <td>
+        <img src="{{ p.thumbnailUrl }}" alt="immagine" />
+      </td>
+      <td>
+        {{ p.title }}
+      </td>
+      <td>
+        <button routerLink="/photos/{{ p.id }}" class="btn btn-info">
+          Dettagli
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

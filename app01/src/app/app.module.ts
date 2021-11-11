@@ -12,11 +12,15 @@ import { CoreModule } from './core/core.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StarComponent } from './shared/star/star.component';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
+import { ProductDetailComponent } from './features/product-detail/product-detail.component';
+import { CarrelloComponent } from './features/carrello/carrello.component';
+import { CarrelloModule } from './features/carrello/carrello.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     StarComponent,
+    ProductDetailComponent,
 
     //componenti di navigazione e le viste
   ],
@@ -28,6 +32,7 @@ import { NavbarComponent } from './core/components/navbar/navbar.component';
     CatalogModule,
     LoginModule,
     ContactsModule,
+    CarrelloModule,
     CoreModule,
     FontAwesomeModule,
   ],

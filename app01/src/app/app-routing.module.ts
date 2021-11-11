@@ -19,8 +19,13 @@ const routes: Routes = [
         (m) => m.ContactsModule
       ),
   },
-
-  // { path: '', component: CatalogComponent },
+  {
+    path: 'carrello',
+    loadChildren: () =>
+      import('./features/carrello/carrello.module').then(
+        (m) => m.CarrelloModule
+      ),
+  },
   {
     path: '',
     redirectTo: '/catalog',
