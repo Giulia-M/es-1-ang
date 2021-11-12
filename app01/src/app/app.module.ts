@@ -11,11 +11,17 @@ import { ContactsModule } from './features/contacts/contacts.module';
 import { CoreModule } from './core/core.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StarComponent } from './shared/star/star.component';
-import { NavbarComponent } from './core/components/navbar/navbar.component';
+// import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { ProductDetailComponent } from './features/product-detail/product-detail.component';
-import { CarrelloComponent } from './features/carrello/carrello.component';
+// import { CarrelloComponent } from './features/carrello/carrello.component';
 import { CarrelloModule } from './features/carrello/carrello.module';
-import { LoginComponent } from './features/login/login.component';
+// import { LoginComponent } from './features/login/login.component';
+import { environment } from '../environments/environment';
+
+import { AngularFireModule } from '@angular/fire/compat';
+
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
   declarations: [
@@ -37,6 +43,9 @@ import { LoginComponent } from './features/login/login.component';
     FontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
   ],
 
   providers: [],

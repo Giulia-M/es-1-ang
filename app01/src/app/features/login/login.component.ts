@@ -5,6 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Auth } from 'src/app/models/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +15,17 @@ import {
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  data!: Auth;
   loginForm: FormGroup;
+
   // inietto una istanza di FormBuilder, componente in grado di
   // creare dinamicamente istanze di elementi form:
   // FormControl, FormGroup, FormArray
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    public auth: AuthService,
+    private router: Router
+  ) {
     this.loginForm = new FormGroup({});
   }
 
@@ -68,4 +77,10 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     alert('Form inviato con successo!');
   }
+
+  /* logout(): void {
+      this.data = undefined;
+      this.router.navigateByUrl('login');
+  }
+  */
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../services/auth.service';
 import { CarrelloService } from '../../services/carrello.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { CarrelloService } from '../../services/carrello.service';
 export class NavbarComponent implements OnInit {
   faStar = faStar;
 
-  constructor(public cart: CarrelloService) {}
+  constructor(public cart: CarrelloService, public auth: AuthService) {}
 
   ngOnInit(): void {}
 }
