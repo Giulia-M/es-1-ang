@@ -22,6 +22,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AuthComponent } from './auth/auth.component';
+import { ModificaProductComponent } from './features/modifica-product/modifica-product.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     StarComponent,
     ProductDetailComponent,
     //componenti di navigazione e le viste
+    AuthComponent,
+    ModificaProductComponent,
   ],
   imports: [
     BrowserModule,

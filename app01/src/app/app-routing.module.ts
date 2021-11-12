@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
+import { ModificaProductComponent } from './features/modifica-product/modifica-product.component';
+import { ProductDetailComponent } from './features/product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -11,6 +14,10 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./features/login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
   },
   {
     path: 'contacts',
@@ -25,6 +32,14 @@ const routes: Routes = [
       import('./features/carrello/carrello.module').then(
         (m) => m.CarrelloModule
       ),
+  },
+  {
+    path: 'photos/:id',
+    component: ProductDetailComponent,
+  },
+  {
+    path: 'photos/:id/modifica',
+    component: ModificaProductComponent,
   },
   {
     path: '',

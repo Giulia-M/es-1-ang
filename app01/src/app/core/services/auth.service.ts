@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from 'src/app/models/auth';
@@ -7,14 +7,14 @@ import { Auth } from 'src/app/models/auth';
   providedIn: 'root',
 })
 export class AuthService {
+  /*
   data: Auth;
   constructor(private http: HttpClient, private router: Router) {
     this.data = {
       name: '',
       token: '',
     };
-  }
-
+  }*/
   /*login(username: any, password: any): void {
     const params = new HttpParams()
       .set('username', username)

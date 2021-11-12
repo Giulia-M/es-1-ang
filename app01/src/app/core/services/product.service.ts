@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Product } from '../../models/product';
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +19,10 @@ export class ProductService {
   constructor(private http: HttpClient) {}
   getAllProducts$(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiURL + '/photos');
+  }
+  getProductById$(id: number): Observable<Product> {
+    return this.http
+      .get<Product>(`${this.apiURL}/photos/${id}`)
+      .pipe(tap((product) => console.log(product)));
   }
 }
