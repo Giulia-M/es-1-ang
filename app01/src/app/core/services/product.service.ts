@@ -25,4 +25,13 @@ export class ProductService {
       .get<Product>(`${this.apiURL}/photos/${id}`)
       .pipe(tap((product) => console.log(product)));
   }
+
+  addProduct$(product: Product): Observable<Product> {
+    // invia un post da salvare
+    return this.http.post<Product>(
+      this.apiURL + '/photos',
+      JSON.stringify(product),
+      this.httpOptions
+    );
+  }
 }

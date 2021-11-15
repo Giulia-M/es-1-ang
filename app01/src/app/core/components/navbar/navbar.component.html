@@ -17,16 +17,24 @@
           <a class="nav-link" routerLink="/"> Catalogo </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login"> Login </a>
+          <a
+            class="nav-link"
+            routerLink="product/nuovo"
+            *ngIf="isAuthenticated"
+          >
+            Aggiungi un nuovo "film"
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/auth"> Authentication </a>
+          <a class="nav-link" routerLink="/auth" *ngIf="!isAuthenticated">
+            Authentication
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/contacts"> Contacts </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="onSaveData()"> save data </a>
+          <a class="nav-link" (click)="onSaveData()"> Save data </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/carrello">
@@ -48,13 +56,12 @@
             </span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Logout</a>
-        </li>
-        <li class="nav-item">
-          <!-- <a class="nav-link" href="">{{ auth.data?.name }}</a> -->
-        </li>
       </ul>
+      <div class="nav navbar-nav navbar-right">
+        <li *ngIf="isAuthenticated">
+          <a style="cursor: pointer">Logout</a>
+        </li>
+      </div>
     </div>
   </div>
 </nav>

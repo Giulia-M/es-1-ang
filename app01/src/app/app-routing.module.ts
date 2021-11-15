@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { ModificaProductComponent } from './features/modifica-product/modifica-product.component';
+import { NuovoProductComponent } from './features/nuovo-product/nuovo-product.component';
 import { ProductDetailComponent } from './features/product-detail/product-detail.component';
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
       import('./features/contacts/contacts.module').then(
         (m) => m.ContactsModule
       ),
+  },
+  {
+    path: 'product/nuovo',
+    component: NuovoProductComponent,
   },
   {
     path: 'carrello',
