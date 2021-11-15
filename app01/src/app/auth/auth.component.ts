@@ -11,6 +11,8 @@ export class AuthComponent {
 
   isLoading = false;
 
+  error: string = '';
+
   constructor(private authService: AuthService) {}
 
   onSwitchMode() {
@@ -32,8 +34,13 @@ export class AuthComponent {
           console.log(responseData);
           this.isLoading = false;
         },
-        (error) => {
-          console.log(error);
+        (errorResp) => {
+          console.log(errorResp);
+          switch (errorResp.error.error.message) {
+            case 'EMAIL_EXISTS':
+              this.error = 'Questa email è già registrata';
+          }
+
           this.isLoading = false;
         }
       );
