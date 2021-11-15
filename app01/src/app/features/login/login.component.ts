@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
+// import { AuthService } from 'src/app/core/services/auth.service';
 import { Auth } from 'src/app/models/auth';
 
 @Component({
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   // FormControl, FormGroup, FormArray
   constructor(
     private fb: FormBuilder,
-    public auth: AuthService,
+    // public auth: AuthService,
     private router: Router
   ) {
     this.loginForm = new FormGroup({});

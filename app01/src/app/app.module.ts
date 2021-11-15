@@ -24,6 +24,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthComponent } from './auth/auth.component';
 import { ModificaProductComponent } from './features/modifica-product/modifica-product.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,8 @@ import { ModificaProductComponent } from './features/modifica-product/modifica-p
     //componenti di navigazione e le viste
     AuthComponent,
     ModificaProductComponent,
+    //
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

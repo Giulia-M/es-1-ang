@@ -20,11 +20,9 @@
         {{ p.title }}
       </td>
       <td>
-        <button
-          routerLink="/photos/{{ p.id }}"
-          class="btn btn-info"
-          (click)="addToCart(p)"
-        >
+        <!-- routerLink="/photos/{{ p.id }}"
+        routerLink="/photos/{{ p.id }}" -->
+        <button class="btn btn-info" (click)="addToCart(p)">
           Aggiungi al carrello
         </button>
         <button class="btn btn-info" routerLink="/photos/{{ p.id }}">
