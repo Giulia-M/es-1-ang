@@ -34,13 +34,9 @@ export class AuthComponent {
           console.log(responseData);
           this.isLoading = false;
         },
-        (errorResp) => {
-          console.log(errorResp);
-          switch (errorResp.error.error.message) {
-            case 'EMAIL_EXISTS':
-              this.error = 'Questa email è già registrata';
-          }
-
+        (errorMessage) => {
+          console.log(errorMessage);
+          this.error = errorMessage;
           this.isLoading = false;
         }
       );
