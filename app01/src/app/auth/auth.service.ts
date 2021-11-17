@@ -52,6 +52,27 @@ export class AuthService {
       );
   }
 
+  //login automatico
+  /*
+  autologin() {
+    //prendere la stringa e riuscire a convertire in oggetto javascript con JSON.parse
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+  }
+  */
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
@@ -103,6 +124,8 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
+    //rimanere connessi (con login) anche quando ricarichiamo la pagina
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 
   logout() {
