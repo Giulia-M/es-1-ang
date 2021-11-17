@@ -34,4 +34,6 @@ export class ProductService {
       this.httpOptions
     );
   }
+
+  private products: Product[] = [];
 }
