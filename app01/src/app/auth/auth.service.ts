@@ -17,7 +17,10 @@ export interface AuthResponseData {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  //voglio archiviare l'utente autenticato e lo memorizzo nella variabile
+  //Subject è importato da rxjs
   user = new Subject<User>();
+
   /*BehaviorSubject possiamo chiamare next per ottenere un valore e possiamo
   iscriverlo per essere informato su nuovi valori . La differenza con Subject
   è che offre anche agli abbonati l'accesso immediato al valore precedentemente emesso anche se
@@ -30,6 +33,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   signup(email: string, password: string) {
+    //restituisce un osservabile
     return this.http
       .post<AuthResponseData>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB7yqauVl8KAexl98vbINJBvcC6FPQWPFk',
@@ -41,6 +45,8 @@ export class AuthService {
       )
       .pipe(
         catchError(this.handleError),
+        //tap senza modificare la risposta.entra nella catena osservabile ma non la ferma,
+        // esegue solo un po di codice con i dati ottenuti dall'osservabile
         tap((respData) => {
           this.handleAuthentication(
             respData.email,
@@ -52,31 +58,30 @@ export class AuthService {
       );
   }
 
-  //login automatico-- RECUPERARE I DATI DALLA MEMORIA LOCALE 
+  //login automatico-- RECUPERARE I DATI DALLA MEMORIA LOCALE
   autologin() {
-      // READ STRING FROM LOCAL STORAGE
-      const retrievedObject = localStorage.getItem('userData');
+    // READ STRING FROM LOCAL STORAGE
+    const retrievedObject = localStorage.getItem('userData');
 
-      // CONVERT STRING TO REGULAR JS OBJECT
-     const parsedObject = JSON.parse(retrievedObject);
-     
-    //userData con i dati che stiamo recuperando 
+    // CONVERT STRING TO REGULAR JS OBJECT
+    const parsedObject = JSON.parse(retrievedObject);
+
+    //userData con i dati che stiamo recuperando
     const userData: {
       email: string;
       id: string;
       _token: string;
       _tokenExpirationDate: string;
-      //1. Accedere all'archiviazione locale 
+      //1. Accedere all'archiviazione locale
       //prendere la stringa e riuscire a convertire in oggetto javascript con JSON.parse
-    } = parsedObject
+    } = parsedObject;
     // JSON.parse(localStorage.getItem('userData'));
 
-     
-    //2.controllare se esiste in memoria l'utente 
+    //2.controllare se esiste in memoria l'utente
     if (!userData) {
       return;
     }
-    //3.nuovo utente prendendo i dati dall'archiviazione 
+    //3.nuovo utente prendendo i dati dall'archiviazione
     const loadedUser = new User(
       userData.email,
       userData.id,
@@ -86,26 +91,34 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    return this.http
-      .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB7yqauVl8KAexl98vbINJBvcC6FPQWPFk',
-        {
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }
-      )
-      .pipe(
-        catchError(this.handleError),
-        tap((respData) => {
-          this.handleAuthentication(
-            respData.email,
-            respData.localId,
-            respData.idToken,
-            +respData.expiresIn
-          );
-        })
-      );
+    return (
+      this.http
+        .post<AuthResponseData>(
+          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB7yqauVl8KAexl98vbINJBvcC6FPQWPFk',
+          {
+            email: email,
+            password: password,
+            returnSecureToken: true,
+          }
+        )
+        // pipe per inviare
+        // tutti gli osservabili restituiti dalla chiamata Http al gestore degli errori.
+        .pipe(
+          catchError(this.handleError),
+          // Tap è utile per registrare il valore. TAP restituisce un osservabile
+          // identico all'origine.
+          tap((respData) => {
+            //voglio creare il nuovo utente
+            //respData è la risposta
+            this.handleAuthentication(
+              respData.email,
+              respData.localId,
+              respData.idToken,
+              +respData.expiresIn
+            );
+          })
+        )
+    );
   }
 
   private handleError(errorResp: HttpErrorResponse) {
@@ -133,14 +146,15 @@ export class AuthService {
     token: string,
     expiresIn: number
   ) {
+    //getTime è il timestamp corrente in millisecondi dall'inizio dei tempi
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
+    //tipo di notifica che l'osservabile invia
     this.user.next(user);
     //usare l'archiviazione locale: rimanere connessi (con login) anche quando ricarichiamo la pagina
-    //userData è la chiave con cui recuperare i dati 
-    //JSON.stringify voglio salvare i dati dell'user in stringa --> memorizzato nella memoria locale 
+    //userData è la chiave con cui recuperare i dati
+    //JSON.stringify voglio salvare i dati dell'user in stringa --> memorizzato nella memoria locale
     localStorage.setItem('userData', JSON.stringify(user));
-   
   }
 
   logout() {

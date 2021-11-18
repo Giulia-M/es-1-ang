@@ -25,11 +25,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    //funzione di subscribe quando siamo connessi tramite login
     this.userSub = this.authService.user.subscribe((user) => {
+      //se non esiste l'utente allora false
       // this.isAuthenticated = !user ? false : true;
       this.isAuthenticated = !!user;
-      console.log(!user);
-      console.log(!!user);
+      /*
+      console.log('cosa succede a !user' + !user);-->'cosa succede a !user false'
+      console.log('cosa succede a !!user' + !!user);--> 'cosa succede a !!user true'
+      */
     });
   }
 
