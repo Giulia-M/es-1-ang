@@ -52,19 +52,31 @@ export class AuthService {
       );
   }
 
-  //login automatico
-  /*
+  //login automatico-- RECUPERARE I DATI DALLA MEMORIA LOCALE 
   autologin() {
-    //prendere la stringa e riuscire a convertire in oggetto javascript con JSON.parse
+      // READ STRING FROM LOCAL STORAGE
+      const retrievedObject = localStorage.getItem('userData');
+
+      // CONVERT STRING TO REGULAR JS OBJECT
+     const parsedObject = JSON.parse(retrievedObject);
+     
+    //userData con i dati che stiamo recuperando 
     const userData: {
       email: string;
       id: string;
       _token: string;
       _tokenExpirationDate: string;
-    } = JSON.parse(localStorage.getItem('userData'));
+      //1. Accedere all'archiviazione locale 
+      //prendere la stringa e riuscire a convertire in oggetto javascript con JSON.parse
+    } = parsedObject
+    // JSON.parse(localStorage.getItem('userData'));
+
+     
+    //2.controllare se esiste in memoria l'utente 
     if (!userData) {
       return;
     }
+    //3.nuovo utente prendendo i dati dall'archiviazione 
     const loadedUser = new User(
       userData.email,
       userData.id,
@@ -72,7 +84,7 @@ export class AuthService {
       new Date(userData._tokenExpirationDate)
     );
   }
-  */
+
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
@@ -124,8 +136,11 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
-    //rimanere connessi (con login) anche quando ricarichiamo la pagina
+    //usare l'archiviazione locale: rimanere connessi (con login) anche quando ricarichiamo la pagina
+    //userData è la chiave con cui recuperare i dati 
+    //JSON.stringify voglio salvare i dati dell'user in stringa --> memorizzato nella memoria locale 
     localStorage.setItem('userData', JSON.stringify(user));
+   
   }
 
   logout() {
