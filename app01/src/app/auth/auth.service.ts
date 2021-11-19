@@ -19,7 +19,7 @@ export interface AuthResponseData {
 export class AuthService {
   //voglio archiviare l'utente autenticato e lo memorizzo nella variabile
   //Subject è importato da rxjs
-  user = new Subject<User>();
+  // user = new Subject<User>();
 
   /*BehaviorSubject possiamo chiamare next per ottenere un valore e possiamo
   iscriverlo per essere informato su nuovi valori . La differenza con Subject
@@ -28,7 +28,7 @@ export class AuthService {
   ciò significa che possiamo ottenere l'accesso come utente attualmente attivo
   anche se ci iscriviamo solo dopo che l'utente è stato emesso
   */
-  // user = new BehaviorSubject<User>(null);
+  user = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -61,10 +61,10 @@ export class AuthService {
   //login automatico-- RECUPERARE I DATI DALLA MEMORIA LOCALE
   autologin() {
     // READ STRING FROM LOCAL STORAGE
-    const retrievedObject = localStorage.getItem('userData');
+    // const retrievedObject = localStorage.getItem('userData');
 
     // CONVERT STRING TO REGULAR JS OBJECT
-    const parsedObject = JSON.parse(retrievedObject);
+    // const parsedObject = JSON.parse(retrievedObject);
 
     //userData con i dati che stiamo recuperando
     const userData: {
@@ -74,7 +74,7 @@ export class AuthService {
       _tokenExpirationDate: string;
       //1. Accedere all'archiviazione locale
       //prendere la stringa e riuscire a convertire in oggetto javascript con JSON.parse
-    } = parsedObject;
+    } = JSON.parse(localStorage.getItem('userData'));
     // JSON.parse(localStorage.getItem('userData'));
 
     //2.controllare se esiste in memoria l'utente
@@ -88,6 +88,10 @@ export class AuthService {
       userData._token,
       new Date(userData._tokenExpirationDate)
     );
+    //4. verificare se l'utente ha un token valido
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+    }
   }
 
   login(email: string, password: string) {
