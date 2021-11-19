@@ -30,6 +30,9 @@ export class AuthService {
   */
   user = new BehaviorSubject<User>(null);
 
+  //timer di scadenza del token
+  private tokenExpirationTimer: any;
+
   constructor(private http: HttpClient, private router: Router) {}
 
   signup(email: string, password: string) {
@@ -90,7 +93,15 @@ export class AuthService {
     );
     //4. verificare se l'utente ha un token valido
     if (loadedUser.token) {
+      //token
       this.user.next(loadedUser);
+      //la data di scadenza è la data di scandenza del token (che è racchiusa in una data in millisecondi che otteniamo chiamando getTime)
+      //meno il timestamp corrente
+      //ottengo la durata che abbiamo fino alla scadenza del token
+      const expirationDuration =
+        new Date(userData._tokenExpirationDate).getTime() -
+        new Date().getTime();
+      this.autoLogout(expirationDuration);
     }
   }
 
@@ -155,6 +166,9 @@ export class AuthService {
     const user = new User(email, userId, token, expirationDate);
     //tipo di notifica che l'osservabile invia
     this.user.next(user);
+
+    this.autoLogout(expiresIn * 1000);
+
     //usare l'archiviazione locale: rimanere connessi (con login) anche quando ricarichiamo la pagina
     //userData è la chiave con cui recuperare i dati
     //JSON.stringify voglio salvare i dati dell'user in stringa --> memorizzato nella memoria locale
@@ -164,5 +178,28 @@ export class AuthService {
   logout() {
     this.user.next(undefined);
     this.router.navigate(['/auth']);
+    //1. cancellare l'archiviazione locale ovvero tutti i dati dell'utente
+    // localStorage.clear();
+    //rimuovo quella chiave di dati dell'utente e i dati che sono memorizzati
+    localStorage.removeItem('userData');
+
+    //verifica se abbiamo un timer attivo non possiamo cancellarlo, ma se è attivo, dovremmo cancellare il nostro timeout
+    //e impostare il timer di scadenza del token
+    if (this.tokenExpirationTimer) {
+      // cancella il timer quando ci disconnettiamo
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    //lo imposto manualmente
+    this.tokenExpirationTimer = null;
+  }
+
+  //impostare un timer quando il token viene archiviato o quando ricevo il token per la prima volta
+  //in modo da sapere quando invalidare quel token in un momento successivo di tempo
+  //la disconnessione automatica dovrebbe ottenere la durata della scadenza (la quantità di millisecondi )
+  autoLogout(expirationDuration: number) {
+    console.log(expirationDuration);
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 }
