@@ -7,7 +7,16 @@ import { CarrelloService } from 'src/app/core/services/carrello.service';
   styleUrls: ['./carrello.component.css'],
 })
 export class CarrelloComponent implements OnInit {
-  constructor(public cart: CarrelloService) {}
+  // constructor(public cart: CarrelloService) {}
 
   ngOnInit(): void {}
+
+  //------
+  constructor(public cart: CarrelloService) {}
+
+  items$ = this.cart.items$;
+
+  addToCart(product) {
+    this.cart.addToCart(product);
+  }
 }

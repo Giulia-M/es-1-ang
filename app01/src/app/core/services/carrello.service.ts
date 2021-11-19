@@ -1,14 +1,41 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { CartItem } from 'src/app/models/cart-item';
 import { Product } from 'src/app/models/product';
-import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarrelloService {
-  items: CartItem[] = [];
+  constructor() {
+    let existingCartItems = JSON.parse(localStorage.getItem('products'));
+    if (!existingCartItems) {
+      existingCartItems = [];
+    }
+    this.itemsSubject.next(existingCartItems);
+  }
 
+  private itemsSubject = new BehaviorSubject<Product[]>([]);
+  items$ = this.itemsSubject.asObservable();
+
+  addToCart(product: Product) {
+    this.items$
+      .pipe(
+        take(1),
+        map((products) => {
+          products.push(product);
+          localStorage.setItem('products', JSON.stringify(products));
+        })
+      )
+      .subscribe();
+  }
+
+  //------------------------//
+
+  // items: CartItem[] = [];
+
+  /*
   addToCart(product: Product) {
     /*
     this.items.push({
@@ -16,7 +43,7 @@ export class CarrelloService {
       id: product.id,
       creationDate: Date.now(),
     });
-    */
+
     this.items = [
       ...this.items,
       {
@@ -27,6 +54,7 @@ export class CarrelloService {
     ];
   }
 
+
   removeFromCart(cartItem: CartItem) {
     this.items = this.items.filter(
       (item) => item.creationDate !== cartItem.creationDate
@@ -36,4 +64,5 @@ export class CarrelloService {
   proceed() {
     window.alert(` Hai acquistato ${this.items.length} film`);
   }
+  */
 }
