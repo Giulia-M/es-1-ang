@@ -20,6 +20,7 @@ export class CarrelloService {
   items$ = this.itemsSubject.asObservable();
 
   addToCart(product: Product) {
+    console.log(this.items$);
     this.items$
       .pipe(
         take(1),
@@ -37,13 +38,13 @@ export class CarrelloService {
 
   /*
   addToCart(product: Product) {
-    /*
+    /*metodo 1
     this.items.push({
       product: product,
       id: product.id,
       creationDate: Date.now(),
     });
-
+    /* metodo 2
     this.items = [
       ...this.items,
       {
@@ -65,4 +66,16 @@ export class CarrelloService {
     window.alert(` Hai acquistato ${this.items.length} film`);
   }
   */
+
+  remove(data: any) {
+    const productArr: any[] = this.itemsSubject.getValue();
+
+    productArr.forEach((item, index) => {
+      if (item === data) {
+        productArr.splice(index, 1);
+      }
+    });
+
+    this.itemsSubject.next(productArr);
+  }
 }

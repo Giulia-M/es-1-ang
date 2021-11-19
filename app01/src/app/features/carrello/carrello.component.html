@@ -2,18 +2,21 @@
   <div class="row">
     <div>
       <div class="col-6 offset-4">
-        <!-- <p>{{ cart.items$.length }} film nel carrello</p> -->
+        <!-- <p>{{ cart.items.length }} film nel carrello</p> -->
         <p>{{ (items$ | async).length }} film nel carrello</p>
       </div>
     </div>
   </div>
-  <!-- items$ | async -->
+
   <!-- *ngFor="let item of cart.items" -->
-  <div class="row" *ngFor="let item of items$ | async">
+  <div class="row" *ngFor="let item of items$ | async; let index = index">
     <div class="col-6 offset-4">
       <div class="flex-lg-row">
         <!-- <h5>Titolo: {{ item.product.title }}</h5> -->
+        <h5>Codice Prodotto [{{ item.id }}] {{ item.title }}</h5>
+        <!-- <h5>{{ item.title }}</h5> -->
 
+        <!-- cart è il service di carrello -->
         <!-- <button
           class="btn btn-outline-danger"
           (click)="cart.removeFromCart(item)"
@@ -30,7 +33,22 @@
               d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
             />
           </svg>
-        </button> -->
+        </button>  -->
+
+        <button class="btn btn-outline-danger" (click)="cart.remove(item)">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-trash-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+            />
+          </svg>
+        </button>
 
         <!-- <button
           *ngIf="cart.items.length"
@@ -40,6 +58,13 @@
         >
           Procedi con l'acquisto
         </button> -->
+        <button
+          *ngIf="(items$ | async).length"
+          type="submit"
+          class="btn btn-warning"
+        >
+          Procedi con l'acquisto
+        </button>
       </div>
     </div>
   </div>
