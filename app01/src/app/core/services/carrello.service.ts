@@ -67,6 +67,11 @@ export class CarrelloService {
   }
   */
 
+  //git checkout branch01
+  //git commit -m "commit commenti"
+  //git checkout main
+  //git commit -m "commit main"
+  //git merge branch01
   remove(data: any) {
     const productArr: any[] = this.itemsSubject.getValue();
 
