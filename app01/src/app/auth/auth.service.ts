@@ -183,13 +183,13 @@ export class AuthService {
     //rimuovo quella chiave di dati dell'utente e i dati che sono memorizzati
     localStorage.removeItem('userData');
 
-    //verifica se abbiamo un timer attivo non possiamo cancellarlo, ma se è attivo, dovremmo cancellare il nostro timeout
-    //e impostare il timer di scadenza del token
+    //se timer di scadenza del token è attivo, dovremmo cancellarlo
+    //e impostare il timer di scadenza del token a null
     if (this.tokenExpirationTimer) {
       // cancella il timer quando ci disconnettiamo
       clearTimeout(this.tokenExpirationTimer);
     }
-    //lo imposto manualmente
+    //lo imposto 
     this.tokenExpirationTimer = null;
   }
 

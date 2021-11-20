@@ -9,6 +9,7 @@ import { Product } from 'src/app/models/product';
 })
 export class CarrelloService {
   constructor() {
+    //per il refresh della pagina i prodotti rimangono nel carrello 
     let existingCartItems = JSON.parse(localStorage.getItem('products'));
     if (!existingCartItems) {
       existingCartItems = [];
@@ -31,7 +32,19 @@ export class CarrelloService {
       )
       .subscribe();
   }
+  remove(data: any) {
+    const productArr: any[] = this.itemsSubject.getValue();
+    productArr.forEach((item, index) => {
+      if (item === data) {
+        productArr.splice(index, 1);
+      }
+    });
 
+    this.itemsSubject.next(productArr);
+
+    //quando refresho la pagina, il carrello ha i prodotti rimasti 
+    localStorage.setItem('products' , JSON.stringify(productArr))
+  }
   //------------------------//
 
   // items: CartItem[] = [];
@@ -72,15 +85,5 @@ export class CarrelloService {
   //git checkout main
   //git commit -m "commit main"
   //git merge branch01
-  remove(data: any) {
-    const productArr: any[] = this.itemsSubject.getValue();
 
-    productArr.forEach((item, index) => {
-      if (item === data) {
-        productArr.splice(index, 1);
-      }
-    });
-
-    this.itemsSubject.next(productArr);
-  }
 }
