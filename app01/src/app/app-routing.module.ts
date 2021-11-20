@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 import { ModificaProductComponent } from './features/modifica-product/modifica-product.component';
 import { NuovoProductComponent } from './features/nuovo-product/nuovo-product.component';
 import { ProductDetailComponent } from './features/product-detail/product-detail.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
   {
     path: 'product/nuovo',
     component: NuovoProductComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'carrello',
