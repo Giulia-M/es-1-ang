@@ -26,6 +26,7 @@ import { AuthComponent } from './auth/auth.component';
 import { ModificaProductComponent } from './features/modifica-product/modifica-product.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { NuovoProductComponent } from './features/nuovo-product/nuovo-product.component';
+import { GenereComponent } from './features/genere/genere.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,6 @@ import { NuovoProductComponent } from './features/nuovo-product/nuovo-product.co
     ProductDetailComponent,
     //componenti di navigazione e le viste
     AuthComponent,
-    ModificaProductComponent,
     //
     LoadingSpinnerComponent,
     NuovoProductComponent,
