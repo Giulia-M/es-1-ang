@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,8 +9,16 @@ import { AuthResponseData, AuthService } from './auth.service';
   templateUrl: './auth.component.html',
 })
 export class AuthComponent {
+  @Output() utenteProfilo = new EventEmitter<{
+    nameUte: string;
+    surnUte: string;
+  }>();
+
   isLoginMode = true;
   isRegister = false;
+
+  newName = '';
+  newSurname = '';
 
   //per il loading spinner
   isLoading = false;
@@ -21,7 +29,7 @@ export class AuthComponent {
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
-    this.isRegister = true;
+    this.isRegister = !this.isRegister;
   }
 
   onSubmit(form: NgForm) {
@@ -67,5 +75,12 @@ export class AuthComponent {
     );
 
     form.reset();
+  }
+
+  onNameSurnAdd() {
+    this.utenteProfilo.emit({
+      nameUte: this.newName,
+      surnUte: this.newSurname,
+    });
   }
 }

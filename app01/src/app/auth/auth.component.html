@@ -13,7 +13,7 @@
           type="text"
           id="name"
           class="form-control"
-          ngModel
+          [(ngModel)]="newName"
           name="name"
           required
         />
@@ -24,7 +24,7 @@
           type="text"
           id="surname"
           class="form-control"
-          ngModel
+          [(ngModel)]="newSurname"
           name="surname"
           required
         />
@@ -67,6 +67,15 @@
 
         <button type="button" class="btn btn-primary" (click)="onSwitchMode()">
           Switch to {{ isLoginMode ? "Sign Up " : "Login" }}
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!authForm.valid"
+          (click)="onNameSurnAdd()"
+        >
+          sign up
         </button>
       </div>
     </form>

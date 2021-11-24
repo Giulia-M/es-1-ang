@@ -9,6 +9,12 @@ import { ProductService } from 'src/app/core/services/product.service';
   styleUrls: ['./nuovo-product.component.css'],
 })
 export class NuovoProductComponent implements OnInit {
+  nomiRegistrati = [
+    {
+      nome: '',
+      cognome: '',
+    },
+  ];
   filmForm: FormGroup;
 
   constructor(private productService: ProductService, private router: Router) {
@@ -40,5 +46,12 @@ export class NuovoProductComponent implements OnInit {
 
     alert('Post inserito correttamente');
     this.router.navigateByUrl('catalog');
+  }
+
+  nomeAggiunto(datiUte: { nameUte: string; surnUte: string }) {
+    this.nomiRegistrati.push({
+      nome: datiUte.nameUte,
+      cognome: datiUte.surnUte,
+    });
   }
 }
