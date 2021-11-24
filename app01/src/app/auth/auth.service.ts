@@ -171,7 +171,8 @@ export class AuthService {
 
     //usare l'archiviazione locale: rimanere connessi (con login) anche quando ricarichiamo la pagina
     //userData è la chiave con cui recuperare i dati
-    //JSON.stringify voglio salvare i dati dell'user in stringa --> memorizzato nella memoria locale
+    //JSON.stringify voglio salvare i dati dell'user in stringa -->
+    //memorizzato nella memoria locale
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
@@ -189,7 +190,7 @@ export class AuthService {
       // cancella il timer quando ci disconnettiamo
       clearTimeout(this.tokenExpirationTimer);
     }
-    //lo imposto 
+    //lo imposto
     this.tokenExpirationTimer = null;
   }
 

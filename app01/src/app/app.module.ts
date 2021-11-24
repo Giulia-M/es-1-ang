@@ -23,10 +23,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthComponent } from './auth/auth.component';
-import { ModificaProductComponent } from './features/modifica-product/modifica-product.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { NuovoProductComponent } from './features/nuovo-product/nuovo-product.component';
-import { GenereComponent } from './features/genere/genere.component';
 
 @NgModule({
   declarations: [
