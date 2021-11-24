@@ -10,6 +10,7 @@ import { AuthResponseData, AuthService } from './auth.service';
 })
 export class AuthComponent {
   isLoginMode = true;
+  isRegister = false;
 
   //per il loading spinner
   isLoading = false;
@@ -20,6 +21,7 @@ export class AuthComponent {
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
+    this.isRegister = true;
   }
 
   onSubmit(form: NgForm) {
@@ -28,6 +30,9 @@ export class AuthComponent {
     }
     const email = form.value.email;
     const password = form.value.password;
+    // const name = form.value.name;
+    // const surname = form.value.surname;
+
     //in firebase rules: .read :'auth!=null
 
     //osservabile

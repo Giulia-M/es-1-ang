@@ -13,6 +13,9 @@ export interface AuthResponseData {
   expiresIn: string;
   localId: string;
   registered?: boolean;
+  //--//
+  // name?: string;
+  // surname?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -33,6 +36,8 @@ export class AuthService {
   //timer di scadenza del token
   private tokenExpirationTimer: any;
 
+  // public utentiRegis: [];
+
   constructor(private http: HttpClient, private router: Router) {}
 
   signup(email: string, password: string) {
@@ -44,6 +49,9 @@ export class AuthService {
           email: email,
           password: password,
           returnSecureToken: true,
+          //--//
+          // name: name,
+          // surname: surname,
         }
       )
       .pipe(
@@ -56,6 +64,9 @@ export class AuthService {
             respData.localId,
             respData.idToken,
             +respData.expiresIn
+
+            // respData.name,
+            // respData.surname
           );
         })
       );
@@ -75,6 +86,9 @@ export class AuthService {
       id: string;
       _token: string;
       _tokenExpirationDate: string;
+      //--//
+      // name: string;
+      // surname: string;
       //1. Accedere all'archiviazione locale
       //prendere la stringa e riuscire a convertire in oggetto javascript con JSON.parse
     } = JSON.parse(localStorage.getItem('userData'));
@@ -90,6 +104,9 @@ export class AuthService {
       userData.id,
       userData._token,
       new Date(userData._tokenExpirationDate)
+      //--//
+      // userData.name,
+      // userData.surname
     );
     //4. verificare se l'utente ha un token valido
     if (loadedUser.token) {
@@ -160,9 +177,13 @@ export class AuthService {
     userId: string,
     token: string,
     expiresIn: number
+    //--//
+    // name?: string,
+    // surname?: string
   ) {
     //getTime è il timestamp corrente in millisecondi dall'inizio dei tempi
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    //--//
     const user = new User(email, userId, token, expirationDate);
     //tipo di notifica che l'osservabile invia
     this.user.next(user);
