@@ -77,10 +77,10 @@ export class AuthComponent {
     form.reset();
   }
 
-  onNameSurnAdd() {
-    this.utenteProfilo.emit({
-      nameUte: this.newName,
-      surnUte: this.newSurname,
-    });
-  }
+  // onNameSurnAdd() {
+  //   this.utenteProfilo.emit({
+  //     nameUte: this.newName,
+  //     surnUte: this.newSurname,
+  //   });
+  // }
 }

@@ -21,6 +21,7 @@ export class ProductDetailComponent implements OnInit {
       title: '',
       url: '',
       thumbnailUrl: '',
+      idCarrello: 0,
     };
   }
 

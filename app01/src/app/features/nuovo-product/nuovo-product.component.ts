@@ -36,6 +36,7 @@ export class NuovoProductComponent implements OnInit {
       title: this.filmForm.controls.title.value,
       url: this.filmForm.controls.url.value,
       thumbnailUrl: this.filmForm.controls.thumbnailUrl.value,
+      idCarrello: 0,
     };
 
     this.productService.addProduct$(film).subscribe(
@@ -48,10 +49,10 @@ export class NuovoProductComponent implements OnInit {
     this.router.navigateByUrl('catalog');
   }
 
-  nomeAggiunto(datiUte: { nameUte: string; surnUte: string }) {
-    this.nomiRegistrati.push({
-      nome: datiUte.nameUte,
-      cognome: datiUte.surnUte,
-    });
-  }
+  // nomeAggiunto(datiUte: { nameUte: string; surnUte: string }) {
+  //   this.nomiRegistrati.push({
+  //     nome: datiUte.nameUte,
+  //     cognome: datiUte.surnUte,
+  //   });
+  // }
 }

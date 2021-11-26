@@ -19,6 +19,7 @@ export class CarrelloComponent implements OnInit {
   product: any;
 
   addToCart(product) {
+    console.log(product);
     this.cart.addToCart(product);
   }
 

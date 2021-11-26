@@ -28,7 +28,7 @@ export class CatalogComponent implements OnInit {
 
   addToCart(p: Product): void {
     // console.log(p);
-    this.cart.addToCart(p);
+    this.cart.addToCart({ idCarrello: Math.random() * 10, ...p });
   }
   setActive(product: Product) {
     // console.log(product);
