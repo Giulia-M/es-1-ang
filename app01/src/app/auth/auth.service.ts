@@ -148,6 +148,10 @@ export class AuthService {
               respData.idToken,
               +respData.expiresIn
             );
+            localStorage.setItem('email', respData.email);
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);
           })
         )
     );
@@ -204,6 +208,7 @@ export class AuthService {
     // localStorage.clear();
     //rimuovo quella chiave di dati dell'utente e i dati che sono memorizzati
     localStorage.removeItem('userData');
+    localStorage.removeItem('email');
 
     //se timer di scadenza del token è attivo, dovremmo cancellarlo
     //e impostare il timer di scadenza del token a null

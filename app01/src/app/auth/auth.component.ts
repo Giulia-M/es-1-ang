@@ -62,8 +62,14 @@ export class AuthComponent {
         console.log(responseData);
         //una volta che le richieste le ho ricevute il loading spinner è su false
         this.isLoading = false;
-        //una volta effettuato il login, c'è il reindirizzo su una nuova pagina
-        this.router.navigate(['/product/nuovo']);
+
+        if (this.isLoginMode) {
+          //una volta effettuato il login, c'è il reindirizzo su una nuova pagina
+          this.router.navigate(['/product/nuovo']);
+        } else {
+          //altrimenti mi registro
+          this.router.navigate(['/auth']);
+        }
       },
       //errorMessage dal service
       (errorMessage) => {

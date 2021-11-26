@@ -71,6 +71,7 @@
           <a style="cursor: pointer" (click)="onLogout()">Logout</a>
         </li>
       </ul>
+      <h6 *ngIf="isAuthenticated">Ciao {{ userName }}</h6>
     </div>
   </div>
 </nav>

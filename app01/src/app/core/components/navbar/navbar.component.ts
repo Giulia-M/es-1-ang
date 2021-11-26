@@ -13,6 +13,7 @@ import { DataStorageService } from '../../services/data-storage.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
+  userName!: any;
   private userSub: Subscription | undefined;
 
   faStar = faStar;
@@ -35,6 +36,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       console.log('cosa succede a !!user' + !!user);--> 'cosa succede a !!user true'
       */
     });
+    this.userName = localStorage.getItem('email');
+    console.log(this.userName);
   }
 
   ngOnDestroy() {
