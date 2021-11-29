@@ -1,6 +1,12 @@
 <h2>Elenco</h2>
 <app-genere></app-genere>
 <app-modifica-product></app-modifica-product>
+<app-cards
+  *ngFor="let p of products"
+  [datiProducts]="p"
+  (addToCart)="addToCart($event)"
+></app-cards>
+
 <table class="table table-striped">
   <thead>
     <tr>

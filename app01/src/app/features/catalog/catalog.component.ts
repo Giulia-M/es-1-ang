@@ -34,4 +34,5 @@ export class CatalogComponent implements OnInit {
     // console.log(product);
     this.active = product;
   }
+  onCardAdded() {}
 }
