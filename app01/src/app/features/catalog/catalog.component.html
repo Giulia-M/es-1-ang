@@ -1,12 +1,17 @@
 <h2>Elenco</h2>
 <app-genere></app-genere>
 <app-modifica-product></app-modifica-product>
-<app-cards
-  *ngFor="let p of products"
-  [datiProducts]="p"
-  (addToCart)="addToCart($event)"
-></app-cards>
+<div class="py-5">
+  <div class="d-flex flex-wrap container">
+    <app-cards
+      *ngFor="let p of products"
+      [datiProducts]="p"
+      (addToCart)="addToCart($event)"
+    ></app-cards>
+  </div>
+</div>
 
+<!--
 <table class="table table-striped">
   <thead>
     <tr>
@@ -28,16 +33,15 @@
         {{ p.title }}
       </td>
       <td>
-        <!-- routerLink="/photos/{{ p.id }}"
-        routerLink="/photos/{{ p.id }}" -->
+
         <button class="btn btn-info" (click)="addToCart(p)">
           Aggiungi al carrello
         </button>
         <button class="btn btn-info" routerLink="/photos/{{ p.id }}">
           Dettaglio "Film"
         </button>
-        <!-- <app-carrello [add]="p.addcart"></app-carrello> -->
+
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->
