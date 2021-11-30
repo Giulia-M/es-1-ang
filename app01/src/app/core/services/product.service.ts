@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Product } from '../../models/product';
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +15,23 @@ export class ProductService {
       'Content-type': 'application/json; charset=UTF-8',
     }),
   };
+
+  // public apiKeyTmdb = 'd74e01c1c95f676efb7328c3ce5b6713';
+
   constructor(private http: HttpClient) {}
+
+  // getFilms(): Observable<Product[]> {
+  //   const options = {
+  //     params: {
+  //       api_key: this.apiKeyTmdb,
+  //       language: 'it-IT',
+  //     },
+  //   };
+  //   return this.http
+  //     .get<Product[]>('https://api.themoviedb.org/3/movie/200', options)
+  //     .pipe(tap((item) => console.log(JSON.stringify(item))));
+  // }
+
   getAllProducts$(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiURL + '/photos');
   }

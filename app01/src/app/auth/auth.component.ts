@@ -9,10 +9,10 @@ import { AuthResponseData, AuthService } from './auth.service';
   templateUrl: './auth.component.html',
 })
 export class AuthComponent {
-  @Output() utenteProfilo = new EventEmitter<{
-    nameUte: string;
-    surnUte: string;
-  }>();
+  // @Output() utenteProfilo = new EventEmitter<{
+  //   nameUte: string;
+  //   surnUte: string;
+  // }>();
 
   isLoginMode = true;
   isRegister = false;

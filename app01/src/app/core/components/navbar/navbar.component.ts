@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Product } from 'src/app/models/product';
 // import { AuthService } from '../../services/auth.service';
 import { CarrelloService } from '../../services/carrello.service';
 import { DataStorageService } from '../../services/data-storage.service';
@@ -17,6 +18,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private userSub: Subscription | undefined;
 
   faStar = faStar;
+  textToSearch: string = '';
+  // products: Product[] = [];
 
   constructor(
     public cart: CarrelloService,

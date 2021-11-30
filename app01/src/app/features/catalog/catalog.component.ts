@@ -10,6 +10,8 @@ import { Product } from 'src/app/models/product';
 })
 export class CatalogComponent implements OnInit {
   products: Product[];
+  textToSearch: string = '';
+  // products_f: Product[] = [];
   active!: Product;
   constructor(
     private productService: ProductService,
@@ -26,6 +28,14 @@ export class CatalogComponent implements OnInit {
     );
   }
 
+  // ngOnInit(): void {
+  //   this.productService.getFilms().subscribe(
+  //     (elenco) => (this.products = elenco),
+  //     (errore) => console.log('errore!' + errore),
+  //     () => console.log('Dati dei post caricati con successo')
+  //   );
+  // }
+
   addToCart(p: Product): void {
     // console.log(p);
     this.cart.addToCart({ idCarrello: Math.random() * 10, ...p });
@@ -34,5 +44,15 @@ export class CatalogComponent implements OnInit {
     // console.log(product);
     this.active = product;
   }
-  onCardAdded() {}
+
+  //non funziona
+  get products_filtered(): Product[] {
+    if (!this.textToSearch) {
+      return this.products;
+    }
+    let filterBy = this.textToSearch.toLocaleLowerCase();
+    return this.products.filter((product: Product) =>
+      product.title.toLocaleLowerCase().includes(filterBy)
+    );
+  }
 }
