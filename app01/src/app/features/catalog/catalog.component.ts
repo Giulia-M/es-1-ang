@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarrelloService } from 'src/app/core/services/carrello.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/models/product';
-
+import { FilterByStatusPipe } from 'src/app/pipe/inputSearch.pipe';
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
@@ -10,8 +10,10 @@ import { Product } from 'src/app/models/product';
 })
 export class CatalogComponent implements OnInit {
   products: Product[];
+  allProducts: Product[];
+
   textToSearch: string = '';
-  // products_f: Product[] = [];
+
   active!: Product;
   constructor(
     private productService: ProductService,
@@ -23,36 +25,20 @@ export class CatalogComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getAllProducts$().subscribe(
       (elenco) => (this.products = elenco),
-      (errore) => console.log('errore!' + errore),
-      () => console.log('Dati dei post caricati con successo')
+      (errore) => console.log('errore' + errore),
+      () => console.log('dati caricati con successo')
     );
   }
-
-  // ngOnInit(): void {
-  //   this.productService.getFilms().subscribe(
-  //     (elenco) => (this.products = elenco),
-  //     (errore) => console.log('errore!' + errore),
-  //     () => console.log('Dati dei post caricati con successo')
-  //   );
-  // }
-
   addToCart(p: Product): void {
-    // console.log(p);
     this.cart.addToCart({ idCarrello: Math.random() * 10, ...p });
   }
   setActive(product: Product) {
-    // console.log(product);
     this.active = product;
   }
 
-  //non funziona
-  get products_filtered(): Product[] {
-    if (!this.textToSearch) {
-      return this.products;
-    }
-    let filterBy = this.textToSearch.toLocaleLowerCase();
-    return this.products.filter((product: Product) =>
-      product.title.toLocaleLowerCase().includes(filterBy)
+  search(value: string): void {
+    this.products = this.allProducts.filter((val) =>
+      val.title.toLowerCase().includes(value)
     );
   }
 }

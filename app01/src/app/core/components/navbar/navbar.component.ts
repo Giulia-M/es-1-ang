@@ -46,13 +46,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.userSub?.unsubscribe();
   }
+  /*
   onSaveData() {
     this.dataStorgeService.storeProduct();
   }
+
   onFetchData() {
     //usare il servizio di archiviazione dei dati e chiamare recuperare i film
     this.dataStorgeService.fetchData();
   }
+  */
   onLogout() {
     this.authService.logout();
   }

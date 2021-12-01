@@ -1,47 +1,21 @@
 <h2>Elenco</h2>
 <app-genere></app-genere>
 <app-modifica-product></app-modifica-product>
+<div class="d-flex">
+  <input
+    placeholder="Search"
+    class="form-control me-2"
+    type="text"
+    [(ngModel)]="textToSearch"
+  />
+</div>
+
 <div class="py-5">
   <div class="d-flex flex-wrap">
     <app-cards
-      *ngFor="let p of products"
+      *ngFor="let p of products | filterByArea: textToSearch"
       [datiProducts]="p"
       (addToCart)="addToCart($event)"
     ></app-cards>
   </div>
 </div>
-
-<!--
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Immagine</th>
-      <th>Titolo</th>
-      <th>Operazioni</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let p of products"
-      (click)="setActive(p)"
-      [ngClass]="{ active: p.id === active?.id }"
-    >
-      <td>
-        <img src="{{ p.thumbnailUrl }}" alt="immagine" />
-      </td>
-      <td>
-        {{ p.title }}
-      </td>
-      <td>
-
-        <button class="btn btn-info" (click)="addToCart(p)">
-          Aggiungi al carrello
-        </button>
-        <button class="btn btn-info" routerLink="/photos/{{ p.id }}">
-          Dettaglio "Film"
-        </button>
-
-      </td>
-    </tr>
-  </tbody>
-</table> -->
